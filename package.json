@@ -7,7 +7,7 @@
     "name": "alkindi-task-example",
     "main": "index.js",
     "dependencies": {
-      "alkindi-task-lib": "local:alkindi-task-lib@1.0.1",
+      "alkindi-task-lib": "github:France-ioi/alkindi-task-lib@^1.0.2",
       "babel-plugin-transform-react-jsx": "npm:babel-plugin-transform-react-jsx@^6.8.0",
       "bootstrap": "github:twbs/bootstrap@^3.3.7",
       "classnames": "npm:classnames@^2.2.5",
@@ -36,7 +36,7 @@
       "os": "npm:jspm-nodelibs-os@^0.2.0",
       "path": "npm:jspm-nodelibs-path@^0.2.0",
       "process": "npm:jspm-nodelibs-process@^0.2.0",
-      "react": "npm:react@^15.4.1",
+      "react": "npm:react@^15.0.0",
       "react-dnd": "npm:react-dnd@^2.0.0",
       "react-dom": "npm:react-dom@^15.4.1",
       "redux": "npm:redux@^3.0.0",

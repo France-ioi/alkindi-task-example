@@ -45,7 +45,7 @@ SystemJS.config({
     "local:*.json"
   ],
   map: {
-    "alkindi-task-lib": "local:alkindi-task-lib@1.0.1",
+    "alkindi-task-lib": "github:France-ioi/alkindi-task-lib@1.0.2",
     "assert": "npm:jspm-nodelibs-assert@0.2.0",
     "babel-plugin-transform-react-jsx": "npm:babel-plugin-transform-react-jsx@6.8.0",
     "bootstrap": "github:twbs/bootstrap@3.3.7",
@@ -518,11 +518,6 @@ SystemJS.config({
         "lodash": "npm:lodash@4.17.2"
       }
     },
-    "npm:react-dnd-html5-backend@2.1.2": {
-      "map": {
-        "lodash": "npm:lodash@4.17.2"
-      }
-    },
     "npm:react-dnd@2.1.4": {
       "map": {
         "lodash": "npm:lodash@4.17.2",
@@ -540,19 +535,6 @@ SystemJS.config({
         "hoist-non-react-statics": "npm:hoist-non-react-statics@1.2.0"
       }
     },
-    "npm:object.assign@4.0.4": {
-      "map": {
-        "define-properties": "npm:define-properties@1.1.2",
-        "function-bind": "npm:function-bind@1.1.0",
-        "object-keys": "npm:object-keys@1.0.11"
-      }
-    },
-    "npm:define-properties@1.1.2": {
-      "map": {
-        "object-keys": "npm:object-keys@1.0.11",
-        "foreach": "npm:foreach@2.0.5"
-      }
-    },
     "npm:dnd-core@2.0.2": {
       "map": {
         "invariant": "npm:invariant@2.2.2",
@@ -561,27 +543,45 @@ SystemJS.config({
         "asap": "npm:asap@2.0.5"
       }
     },
-    "local:alkindi-task-lib@1.0.1": {
-      "map": {
-        "es6-shim": "npm:es6-shim@0.35.2",
-        "babel-runtime": "npm:babel-runtime@6.20.0",
-        "object.assign": "npm:object.assign@4.0.4",
-        "array.prototype.fill": "npm:array.prototype.fill@1.0.2",
-        "es5-sham-ie8": "npm:es5-sham-ie8@1.0.1",
-        "es5-shim": "npm:es5-shim@4.5.9",
-        "classnames": "npm:classnames@2.2.5",
-        "epic-linker": "npm:epic-linker@1.0.7",
-        "epic-component": "npm:epic-component@0.3.1",
-        "html5shiv": "npm:html5shiv@3.7.3",
-        "react-dnd-html5-backend": "npm:react-dnd-html5-backend@2.1.2",
-        "es6-promise": "npm:es6-promise@4.0.5",
-        "rc-tooltip": "npm:rc-tooltip@3.4.2",
-        "react-redux": "npm:react-redux@5.0.1"
-      }
-    },
     "npm:epic-linker@1.0.7": {
       "map": {
         "babel-runtime": "npm:babel-runtime@6.20.0"
+      }
+    },
+    "npm:object.assign@4.0.4": {
+      "map": {
+        "function-bind": "npm:function-bind@1.1.0",
+        "define-properties": "npm:define-properties@1.1.2",
+        "object-keys": "npm:object-keys@1.0.11"
+      }
+    },
+    "npm:react-dnd-html5-backend@2.1.2": {
+      "map": {
+        "lodash": "npm:lodash@4.17.2"
+      }
+    },
+    "npm:define-properties@1.1.2": {
+      "map": {
+        "object-keys": "npm:object-keys@1.0.11",
+        "foreach": "npm:foreach@2.0.5"
+      }
+    },
+    "github:France-ioi/alkindi-task-lib@1.0.2": {
+      "map": {
+        "epic-linker": "npm:epic-linker@1.0.7",
+        "es5-shim": "npm:es5-shim@4.5.9",
+        "object.assign": "npm:object.assign@4.0.4",
+        "react-dnd-html5-backend": "npm:react-dnd-html5-backend@2.1.2",
+        "array.prototype.fill": "npm:array.prototype.fill@1.0.2",
+        "es5-sham-ie8": "npm:es5-sham-ie8@1.0.1",
+        "epic-component": "npm:epic-component@0.3.1",
+        "classnames": "npm:classnames@2.2.5",
+        "html5shiv": "npm:html5shiv@3.7.3",
+        "es6-promise": "npm:es6-promise@4.0.5",
+        "es6-shim": "npm:es6-shim@0.35.2",
+        "react-redux": "npm:react-redux@5.0.1",
+        "babel-runtime": "npm:babel-runtime@6.20.0",
+        "rc-tooltip": "npm:rc-tooltip@3.4.2"
       }
     }
   }
