@@ -1,7 +1,7 @@
 import React from 'react';
 import EpicComponent from 'epic-component';
 
-export const Task = EpicComponent(self => {
+export default EpicComponent(self => {
 
    self.render = function () {
       const {task} = self.props;

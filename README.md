@@ -46,10 +46,19 @@ SystemJS.config transpiler (Babel, Traceur, TypeScript, None) [babel]: babel
 Add to package.json:
 ```
   "scripts": {
-    "build": "jspm build src/main.js dist/index.js --minify --format umd --global-name Task",
-    "build-dev": "jspm bundle --minify src/alkindi-task-example.js - '[src/**/*]' + babel-plugin-transform-react-jsx + css dist/dev-bundle.js",
-    "serve": "http-server ."
+    "build": "jspm build src/index.js dist/index.js --minify --format umd --global-name Task",
+    "build-dev": "jspm bundle src/alkindi-task-example.js - '[src/**/*]' + babel-plugin-transform-react-jsx + css dist/dev-bundle.js",
+    "serve": "http-server -c-1 ."
   }
+```
+
+# React
+
+.gitignore:
+```
+/node_modules
+/jspm_packages
+/dist
 ```
 
 # React
@@ -90,6 +99,10 @@ Add to jspm.config:
     }
   }
 ```
+
+ The "meta" option needs to be added at the top level (to apply to all .css
+ files), not inside `packages['alkindi-task-example'].meta` (where it would
+ only apply to css files inside that package).
 
 # Linker and task library
 

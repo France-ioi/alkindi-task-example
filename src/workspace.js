@@ -58,7 +58,8 @@ export default function* (deps) {
       const {score, task, workspace, dispatch} = self.props;
       return (
         <div>
-          <p>{task.min} {task.hints.min} {task.hints.max} {task.max}</p>
+          <p>Find a number between {task.min} and {task.max}.</p>
+          <p>Current hint: it is between {task.hints.min} and {task.hints.max}.</p>
           <p>Try {workspace.guess}.</p>
           <p>
             <Button onClick={onTooSmall}>it is too small</Button>
