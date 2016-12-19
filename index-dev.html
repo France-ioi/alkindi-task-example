@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<meta charset="utf-8">
+<div id="task">
+  <div id="container" class="container"></div>
+</div>
+<script src="jspm_packages/system.js"></script>
+<script src="jspm.config.js"></script>
+<script type="text/javascript">
+  System.import('alkindi-task-example').then(function (main) {
+    var min = 0, max = 100;
+    var number = min + Math.floor(Math.random() * (max - min));  // secret
+    var task = {min: min, max: max, hints: {min: min, max: max}};
+    main.run({
+      container: document.getElementById('container'),
+      score: 100,
+      task: task,
+      view: 'workspace'
+    });
+  });
+</script>
