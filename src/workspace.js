@@ -6,13 +6,13 @@ import WorkspaceBuilder from 'alkindi-task-lib/simple_workspace';
 
 export default function* (deps) {
 
+  /* Actions dispatched by the workspace */
+
   yield defineAction('guessTooSmall', 'Workspace.GuessTooSmall');
   yield defineAction('guessTooLarge', 'Workspace.GuessTooLarge');
   yield defineAction('resetInterval', 'Workspace.ResetInterval');
 
-  const computeGuess = function (min, max) {
-    return Math.floor((min + max) / 2)
-  };
+  /* Simple workspace interface: init, dump, load, update, View */
 
   const init = function (task) {
     const {min, max} = task.hints;
@@ -72,6 +72,16 @@ export default function* (deps) {
 
   });
 
+  yield include(WorkspaceBuilder({init, dump, load, update, View}));
+
+  /*
+    Add reducers for workspace actions and any needed sagas below:
+  */
+
+  const computeGuess = function (min, max) {
+    return Math.floor((min + max) / 2);
+  };
+
   yield addReducer('guessTooSmall', function (state, action) {
     let {guess} = action;
     let {workspace} = state;
@@ -98,10 +108,5 @@ export default function* (deps) {
     const guess = computeGuess(min, max);
     return {...state, workspace: {...workspace, min, max, guess}};
   });
-
-  //
-  // Pass our implementation to the workspace builder:
-  //
-  yield include(WorkspaceBuilder({init, dump, load, update, View}));
 
 };
