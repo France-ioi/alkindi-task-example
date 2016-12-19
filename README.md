@@ -1,4 +1,20 @@
-# Starting a new task
+# Installation
+
+```
+git clone https://github.com/France-ioi/alkindi-task-example.git
+cd alkindi-task-example
+npm install
+jspm install
+```
+
+Run `npm run serve` to start a webserver on port 8080 then load
+`http://localhost:8080/index-dev.html`.
+
+To reduce load time, `npm run build-dev` builds a bundle containing
+the dependencies.  Remember to re-run this command whenever the JSPM
+dependencies change.
+
+# Setting up a new task
 
 This file describes the process of setting up a new task.
 
@@ -109,7 +125,7 @@ Add to jspm.config:
 ```
 jspm install npm:react-redux
 jspm install npm:epic-linker
-jspm install alkindi-task-lib=github:France-ioi/alkindi-task-lib@master
+jspm install alkindi-task-lib=github:France-ioi/alkindi-task-lib@1.0.2
 ```
 
 # Copy boilerplate
