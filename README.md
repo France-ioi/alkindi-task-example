@@ -35,9 +35,9 @@ package.json directories.baseURL: .
 package.json configFiles folder [./]: ./
 Use package.json configFiles.jspm:dev? [No]: No
 SystemJS.config browser baseURL (optional): /
-SystemJS.config Node local project path [src/]: src/
+SystemJS.config Node local project path [src/]: obj/
 SystemJS.config local package main [alkindi-task-example.js]: index.js
-SystemJS.config transpiler (Babel, Traceur, TypeScript, None) [babel]: babel
+SystemJS.config transpiler (Babel, Traceur, TypeScript, None) [babel]: none
 ```
 
 Standard jspm init:
@@ -50,50 +50,69 @@ package.json configFiles folder [./]: ./
 Use package.json configFiles.jspm:dev? [No]: No
 Use package.json configFiles.jspm:browser? [No]: No
 SystemJS.config browser baseURL (optional): ./
-SystemJS.config Node local project path [src/]: src/
-SystemJS.config browser local project URL to src/ [src/]: src/
+SystemJS.config Node local project path [src/]: obj/
+SystemJS.config browser local project URL to src/ [obj/]: obj/
 package.json directories.packages [jspm_packages/]: jspm_packages/
 SystemJS.config browser URL to jspm_packages [jspm_packages/]: jspm_packages/
 SystemJS.config local package main [alkindi-task-playfair.js]: index.js
-SystemJS.config local package format (esm, cjs, amd): esm
-SystemJS.config transpiler (Babel, Traceur, TypeScript, None) [babel]: babel
+SystemJS.config local package format (esm, cjs, amd): cjs
+SystemJS.config transpiler (Babel, Traceur, TypeScript, None) [babel]: none
 ```
 
 Add to package.json:
 ```
   "scripts": {
-    "build": "jspm build src/index.js dist/index.js --minify --format umd --global-name Task",
-    "build-dev": "jspm bundle src/alkindi-task-example.js - '[src/**/*]' + babel-plugin-transform-react-jsx + css dist/dev-bundle.js",
+    "build": "babel --out-dir obj src && jspm build obj/index.js dist/index.js --minify --format umd --global-name Task",
+    "build-dev": "babel --out-dir obj src && jspm bundle obj/index.js - '[obj/**/*]' + css dist/dev-bundle.js",
+    "watch": "babel --watch --out-dir obj src",
     "serve": "http-server -c-1 ."
   }
 ```
 
-# React
+# git
 
-.gitignore:
-```
+``
+git init .
+cat >.gitignore <<EOF
 /node_modules
 /jspm_packages
 /dist
+/obj
+EOF
+```
+
+# babel
+
+```
+$ npm install --save-dev babel-cli \
+  babel-preset-es2015 \
+  babel-preset-react \
+  babel-plugin-transform-es2015-modules-systemjs \
+  babel-plugin-transform-object-rest-spread \
+  babel-plugin-transform-runtime
+$ cat >.babelrc <<EOF
+{
+  "presets": [
+    "es2015",
+    "react",
+    {
+      "plugins": [
+        "transform-object-rest-spread",
+        "transform-runtime",
+        "transform-es2015-modules-systemjs"
+      ]
+    }
+  ]
+}
 ```
 
 # React
 
 Run:
 ```
-jspm install npm:babel-plugin-transform-react-jsx
 jspm install npm:classnames
 jspm install npm:react-bootstrap
 jspm install npm:epic-component
-```
-
-Add to jspm.config:
-```
-  babelOptions: {
-    "plugins": [
-      "babel-plugin-transform-react-jsx"
-    ]
-  }
 ```
 
 # CSS
@@ -101,13 +120,22 @@ Add to jspm.config:
 Install plugin-css and dependencies containing css files:
 
 ```
-jspm install --dev css
+jspm install css
 jspm install npm:font-awesome
 jspm install bootstrap=github:twbs/bootstrap
 jspm install npm:rc-tooltip
 ```
 
-Add to jspm.config:
+Loading a css is done by plugin-css, using this import syntax:
+```
+import "font-awesome/css/font-awesome.min.css!";
+import "bootstrap/dist/css/bootstrap.min.css!";
+import "rc-tooltip/assets/bootstrap.css!";
+import "alkindi-task-example.css/style.css!";
+```
+
+The `!` can be left out if plugin-css is configured as the loader for
+all css files in jspm.config.js:
 ```
   meta: {
     "*.css": {
@@ -115,17 +143,23 @@ Add to jspm.config:
     }
   }
 ```
-
- The "meta" option needs to be added at the top level (to apply to all .css
- files), not inside `packages['alkindi-task-example'].meta` (where it would
- only apply to css files inside that package).
+The "meta" option needs to be added at the top level (to apply to all .css
+files), not inside `packages['alkindi-task-example'].meta` (where it would
+only apply to css files inside that package).
+With this setup, this works as well:
+```
+import "font-awesome/css/font-awesome.min.css";
+import "bootstrap/dist/css/bootstrap.min.css";
+import "rc-tooltip/assets/bootstrap.css";
+import "alkindi-task-example.css/style.css";
+```
 
 # Linker and task library
 
 ```
 jspm install npm:react-redux
 jspm install npm:epic-linker
-jspm install alkindi-task-lib=github:France-ioi/alkindi-task-lib@1.0.2
+jspm install 'npm:alkindi-task-lib@^1.1.2'
 ```
 
 # Copy boilerplate
@@ -141,4 +175,3 @@ Copy boilderplate files from this project:
 
 In `index-dev.html` replace `alkindi-task-example` with the package name
 and fill in the development task object.
-
